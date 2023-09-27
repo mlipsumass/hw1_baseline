@@ -14,6 +14,8 @@ public class ExpenseTrackerView extends JFrame {
   private JTextField categoryField;
   private DefaultTableModel model;
   private List<Transaction> transactions = new ArrayList<>();
+  private String errorMessage;
+  private JTextArea inputErrorLabel;
 
   public JTable getTransactionsTable() {
     return transactionsTable;
@@ -63,13 +65,33 @@ public class ExpenseTrackerView extends JFrame {
     categoryField = new JTextField(10);
     transactionsTable = new JTable(model);
 
+    inputErrorLabel = new JTextArea("");
+    inputErrorLabel.setForeground(Color.RED);
+    inputErrorLabel.setBackground(getForeground());
+    inputErrorLabel.setLineWrap(true);
+    inputErrorLabel.setWrapStyleWord(true);
+    inputErrorLabel.setEditable(false);
+
     // Layout components
     JPanel inputPanel = new JPanel();
-    inputPanel.add(amountLabel);
-    inputPanel.add(amountField);
-    inputPanel.add(categoryLabel);
-    inputPanel.add(categoryField);
-    inputPanel.add(addTransactionBtn);
+    inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.PAGE_AXIS));
+
+    JPanel inputSection = new JPanel();
+    inputSection.setPreferredSize(new Dimension(400, 30));
+    inputPanel.add(inputSection);
+
+    inputSection.add(amountLabel);
+    inputSection.add(amountField);
+    inputSection.add(categoryLabel);
+    inputSection.add(categoryField);
+    inputSection.add(inputErrorLabel);
+    inputSection.add(addTransactionBtn);
+
+    JPanel errorSection = new JPanel();
+    errorSection.setLayout(new BorderLayout());
+    inputPanel.add(errorSection);
+
+    errorSection.add(inputErrorLabel);
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.add(addTransactionBtn);
@@ -116,6 +138,13 @@ public class ExpenseTrackerView extends JFrame {
     // Pass to view
     refreshTable(transactions);
 
+    // Update input error message
+    if (errorMessage == null) {
+      inputErrorLabel.setText("");
+    } else {
+      inputErrorLabel.setText(errorMessage);
+    }
+
   }
 
   public List<Transaction> getTransactions() {
@@ -129,4 +158,8 @@ public class ExpenseTrackerView extends JFrame {
   }
 
   // Other view methods
+
+  public void setInputErrorMessage(String message) {
+    this.errorMessage = message;
+  }
 }

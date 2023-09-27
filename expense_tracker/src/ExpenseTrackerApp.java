@@ -31,25 +31,31 @@ public class ExpenseTrackerApp {
         amount = view.getAmountField();
         if (!InputValidation.validAmount(amount)) {
           successfulTransaction = false;
-          errorMessage = "Input must be between 0 and 1000 (exclusive)";
+          errorMessage += "Amount input must be between 0 and 1000 (exclusive)\n";
         }
       } catch (Exception ex) {
         successfulTransaction = false;
-        errorMessage = "Input must be a decimal number";
+        errorMessage += "Amount input must be a decimal number between 0 and 1000 (exclusive)\n";
       }
 
       String category = view.getCategoryField();
       if (!InputValidation.validCategory(category)) {
         successfulTransaction = false;
-        errorMessage = "Input must be one of: food, travel, bills, entertainment, other";
+        errorMessage += "Category input must be one of: food, travel, bills, entertainment, other\n";
       }
 
       if (successfulTransaction) {
+
+        view.setInputErrorMessage(null);
+
         // Create transaction object
         Transaction t = new Transaction(amount, category);
 
         // Call controller to add transaction
         view.addTransaction(t);
+      } else {
+        view.setInputErrorMessage(errorMessage);
+        view.refresh();
       }
 
     });

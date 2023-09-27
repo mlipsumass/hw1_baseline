@@ -35,7 +35,7 @@ public class ExpenseTrackerApp {
         successfulTransaction = false;
       }
 
-      String category = "";
+      String category = view.getCategoryField();
       if (!InputValidation.validCategory(category)) {
         successfulTransaction = false;
       }

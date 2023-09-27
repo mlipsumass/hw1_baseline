@@ -24,20 +24,24 @@ public class ExpenseTrackerApp {
 
       // Get transaction data from view
       boolean successfulTransaction = true;
+      String errorMessage = "";
 
       double amount = -1;
       try {
         amount = view.getAmountField();
         if (!InputValidation.validAmount(amount)) {
           successfulTransaction = false;
+          errorMessage = "Input must be between 0 and 1000 (exclusive)";
         }
       } catch (Exception ex) {
         successfulTransaction = false;
+        errorMessage = "Input must be a decimal number";
       }
 
       String category = view.getCategoryField();
       if (!InputValidation.validCategory(category)) {
         successfulTransaction = false;
+        errorMessage = "Input must be one of: food, travel, bills, entertainment, other";
       }
 
       if (successfulTransaction) {

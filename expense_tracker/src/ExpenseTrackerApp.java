@@ -28,14 +28,15 @@ public class ExpenseTrackerApp {
       double amount = -1;
       try {
         amount = view.getAmountField();
+        if (!InputValidation.validAmount(amount)) {
+          successfulTransaction = false;
+        }
       } catch (Exception ex) {
         successfulTransaction = false;
       }
 
       String category = "";
-      try {
-        category = view.getCategoryField();
-      } catch (Exception ex) {
+      if (!InputValidation.validCategory(category)) {
         successfulTransaction = false;
       }
 

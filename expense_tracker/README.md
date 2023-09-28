@@ -27,7 +27,7 @@ Create a file named ```InputValidation.java```  to validate the ```amount``` and
 5. Update the ExpenseTrackerApp.java with the input validation steps for adding transaction.
 
 ## Manual Review
-Here are some examples of satisfying ```non-functional`` requirements:
+Here are some examples of satisfying ```non-functional``` requirements:
 1. Understandability
 • External documentation (such as a README file) improves program understanding. This app’s
 README file helps users and developers by providing the build instructions.

@@ -15,6 +15,7 @@ public class InputValidation {
 		acceptableCategories.add("other");
 	}
 
+	// Business logic shown here, correct data type handled in ExpenseTrackerApp
 	public static boolean validAmount(double amount) {
 		return amount > 0 && amount < 1000;
 	}
